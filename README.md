@@ -1,5 +1,5 @@
 # Protocol-Buffer_Delphi_FPC
-An Object-Pascal impementation for Google Protocol Buffer system.  For use in Delphi and FPC projects.  Includes a code generator (protoc3-pascal) to parse .proto message files into .pas files.
+An Object-Pascal impementation for Google Protocol Buffer system.  For use in Delphi and FPC projects.  Includes a code generator (protoc-pascal) to parse .proto message files into .pas files.
 
 ## How to use?
 - Add the file ProtocolBuffer.pas to your project,
@@ -15,7 +15,7 @@ begin
   Size := SampleProto.EncodeToStream(OutboundStream);
   SampleProto.Free;
 ```
-The `EncodeToStream` function serializes the properties of SampleProto into the Stream Object, ready to be sent to its destination.\
+The `EncodeToStream` function serializes the properties of SampleProto into the TStream Object, ready to be sent to its destination.\
 \
 To decode incoming data:
 ```
