@@ -3,7 +3,7 @@ An Object-Pascal impementation for Google Protocol Buffer system.  For use in De
 
 ## How to use?
 - Add the file ProtocolBuffer.pas to your project,
-- Use the protoc-pascal.exe to convert your .proto message files to .pas files.  Add these to your project.
+- Use the protoc-pascal.exe utility to convert your .proto message files into .pas object files.  Add these to your project.
 - Add code to you project like so:
 ```
 procedure TForm1.Button1Click(Sender: TObject);
@@ -15,16 +15,23 @@ begin
   Size := SampleProto.EncodeToStream(OutboundStream);
   SampleProto.Free;
 ```
-The `EncodeToStream` function serializes the properties of SampleProto into the Stream Object, ready to be sent to its destination.
+The `EncodeToStream` function serializes the properties of SampleProto into the Stream Object, ready to be sent to its destination.\
 \
 To decode incoming data:
 ```
   SampleProto := TSampleProto.Create;
   Size := SampleProto.DecodeToProto(InboundStream, ByteSizeOfData);
 ```
-The `DecodeToProto` function takes the encoded stream data de-serializes it to teh propeties of SampleProto.
+The `DecodeToProto` function takes the encoded stream data and de-serializes it to the propeties of SampleProto.\
 \
 That's it - simple.
 
 ### Features
+- Automatically creates nested message (object) types.  Access these like so: `SampleProto.NestedProto.AString := 'xyz';`
+- Automatically allocates repeated (array) data types.  Access these like so: `SampleProto.SomeIntArray[2] := 321;`
+- Automatically creates repeated nested (array) data types.  Access these like so: `SampleProto.NestedArray[3].x := 789;`
+- Converts enum message types into Pascal Enumeration types.
+
+
+
 
