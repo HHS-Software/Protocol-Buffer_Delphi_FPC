@@ -31,6 +31,7 @@ That's it - simple.
 - Automatically allocates repeated (array) data types.  Access these like so: `SampleProto.SomeIntArray[2] := 321;`
 - Automatically creates repeated nested (array) data types.  Access these like so: `SampleProto.NestedArray[3].x := 789;`
 - Converts enum message types into Pascal Enumeration types.
+- Does all proto v3 specification messages, options, defaults code.  Handles most v2023, v2024 code.
 
 
 
