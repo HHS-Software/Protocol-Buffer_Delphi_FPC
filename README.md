@@ -22,7 +22,7 @@ To decode incoming data:
   SampleProto := TSampleProto.Create;
   Size := SampleProto.DecodeToProto(InboundStream, ByteSizeOfData);
 ```
-The `DecodeToProto` function takes the encoded stream data and de-serializes it to the propeties of SampleProto.\
+The `DecodeToProto` function takes the encoded stream data and de-serializes it to the propeties of SampleProto.
 
 ### Features
 - Automatically creates nested message (object) types.  Access these like so: `SampleProto.NestedProto.AString := 'xyz';`
