@@ -15,7 +15,7 @@ begin
   Size := SampleProto.EncodeToStream(OutboundStream);
   SampleProto.Free;
 ```
-Now the OutboundStream holds the encoded ProtocolBuffer data stream, ready to be sent to its destination.
+The `EncodeToStream` function serializes the properties of SampleProto into the Stream Object, ready to be sent to its destination.
 \
 To decode incoming data:
 ```
