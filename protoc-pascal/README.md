@@ -35,8 +35,12 @@ This utility will take ProtocolBuffer message .proto formatted files as input, a
 
 ###  Notes:
 - The utility can process hundreds of input .proto files in the same run.  It searches directories for .proto files.  With default settings, it outputs one .pas file for every .proto file.
-- For better results, use the ```-m, -merge``` param, and its merges hundreds of single .pas files into one large .pas file.  All the required ```uses, forwards, etc``` statements are added automatically.
+- For better results, use the ```-m, -merge``` param, as it merges hundreds of single .pas files into one large .pas file.  All the required ```uses, forwards, etc``` statements are added automatically.
 - The default template file is attached to the binary, and no extra file is needed.  If you want to modify the template, then dump the original ```-prntmplt```, modify it and reload it with ```-tmplt=NAME```.
 - The ```-pr, -prefix=ID``` adds a short name to the front of all proto classes. i.e. ```prefix=ABC``` gives ```TABC<protoname> = class```
-- Enum types:  Normally these are converted into pascal Enumeration type.  But if the option ```allow_alias``` is in the enum definition, indicating C style enum value integer re-use, then this utility will force all enum values to ```const``` values.
+- Enum types:  Normally these are converted into pascal Enumeration type.  But if the option ```allow_alias``` is in the enum definition, indicating C style enum value integer re-use, then this utility will force all enum values to ```const``` values.  The ```-enmcnst``` param does this too.
+- The option ```-sv, -srcver=NAME``` gives a single line import of a version number - usefull to stamp proto file revisions # into the resulting .pas files.  Its printed on about line 6.
+- The ```-valeq``` controls how ```property write``` code is created.  In default, each property value assignment will write the value to the private FSomeprop: integer;  This in not normal pascal.  With the ```-valeq``` param added, the write code will include the usual ```if Value <> FSomeprop  then  FSomeprop := Value;```.\
+This setting is important to the way you send data.  Writing a value will set the touched flag, and cause the value to be pushed out the data stream, including empty strings and zeros. However, depending on the recieving end code, they might follow the proto rules and know zero and null strings are valid and do not need them sent (use ```-valeq```).  But with badly designed reciever code it will expect a valid field to be ```set``` including the zeroes and nulls (```-valeq``` required).
+- 
 
