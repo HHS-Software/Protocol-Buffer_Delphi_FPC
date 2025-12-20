@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+
+message sample {
+    optional int32 reqId = 1;
+    required double field2 = 2;
+    optional string someString = 3;
+	repeated int32 SomeInts = 4;
+    map<string, string> mapStrStr = 5;
+}	
+
+message twoInts {
+    optional int32 AnIntOne = 1;
+    optional int32 AnIntTwo = 2;
+}	
+
+message simpleWithNested {
+    optional twoInts aTwoInts = 1;
+    repeated twoInts manyTwoInts = 2;
+}
+
+message complex {
+    message Nested2 {
+        enum enums2 {
+            N0 = 0;
+            N1 = 1;
+			N2 = 2;
+		}
+		required int32 an_int = 1;
+		optional enums2 anenum = 2;
+	}
+	required string a_stringInComplex = 1;
+}
+
+message emptyMessage {
+}
+
+message messy {
+//  dont't use this line
+  enum Enum {
+    E1 = 13;
+    E2 = 77;
+  }
+  optional string string_field = 1 [default = "abc"];
+  optional bool bool_field = 2 [default = true];
+  optional int64 int_field = 3 [default = 11];  optional Enum enum_field = 4 [default = E1];
+/*
+here is a more comments
+and here too
+      */  
+  optional string empty_field = 6 [default = ""];
+  optional bytes bytes_field = 8
+      [default = "moo"];  // Base64 encoding is "bW9v"
+}
+
+message ErrorStatus {
+  string message = 1;
+  repeated google.protobuf.Any details = 2;
+}
