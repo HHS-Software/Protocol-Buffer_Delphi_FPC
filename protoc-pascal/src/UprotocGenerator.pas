@@ -1088,7 +1088,7 @@ begin
 
     DecodeDate(Date, y, m, d);
     s := WorkStrList[2];
-    s := s + '   Version ' + Version + '  (' + IntToStr(y) + ')';
+    s := s + '   Version ' + BuildVersionStr + '  (' + IntToStr(y) + ')';
     WorkStrList[2] := s;
 
     WorkStrList.Add('unit ' + UnitNameStr + ';');

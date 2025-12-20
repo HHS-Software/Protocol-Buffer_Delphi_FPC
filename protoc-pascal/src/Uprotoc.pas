@@ -43,7 +43,7 @@ begin
     Exit;
   if FindCmdLineSwitch('v') or FindCmdLineSwitch('version') then
     begin
-      WriteLn('version=' + Version);
+      WriteLn('version=' + BuildVersionStr);
       WriteLn('');
       Exit;
     end;

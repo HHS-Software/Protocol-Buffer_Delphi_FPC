@@ -80,7 +80,7 @@ end;
 function {*TPROTONAME*}.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := {*PROTONAME*}WireDataSubTypes[Index];
 end;
 {*WIREDATASUBTYPEFUNCEND*}

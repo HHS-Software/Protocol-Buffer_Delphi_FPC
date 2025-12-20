@@ -28,7 +28,7 @@ type
     DefaultVal: string;
   end;
 
-const Version: string = 'v1.00';
+const BuildVersionStr: string = 'v1.01';
 
 const TEMPLATE_FILE_SIZE  = 10000; // MUST be equal or bigger that actual file size;
 
@@ -63,7 +63,7 @@ const WireDataSubTypeToPascal: array [TWireDataSubType] of string = ('*missing*'
 );
 
 const HeaderStr: array [0..2] of string = (
-'  protoc3-pascal.exe',
+'  protoc-pascal.exe',
 '    A tool to create Delphi files from Protocol Buffer v3 message files.',
 '    by HHS Software Corp (c) 2025.'
 );

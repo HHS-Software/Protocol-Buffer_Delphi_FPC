@@ -1,6 +1,6 @@
 {
 Subject to the terms of the MIT license: Copyright (c) 2025 HHS Software Corp.
-  Created with protoc-pascal.exe   Version v1.00  (2025)
+  Created with protoc-pascal.exe   Version v1.01  (2025)
     https://github.com/HHS-Software/Protocol-Buffer_Delphi_FPC
     A utility to read and convert the Google Protocol Buffer v3 system into pascal code.
     The code is designed for the v3 proto.  Later proto versions possibly too.
@@ -433,7 +433,7 @@ end;
 function TTwoIntsProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := TwoIntsWireDataSubTypes[Index];
 end;
 
@@ -508,7 +508,7 @@ end;
 function TSimpleWithNestedProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := SimpleWithNestedWireDataSubTypes[Index];
 end;
 
@@ -624,7 +624,7 @@ end;
 function TComplexNested2Proto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := ComplexNested2WireDataSubTypes[Index];
 end;
 
@@ -691,7 +691,7 @@ end;
 function TComplexProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := ComplexWireDataSubTypes[Index];
 end;
 
@@ -750,7 +750,7 @@ end;
 function TEmptyMessageProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := EmptyMessageWireDataSubTypes[Index];
 end;
 
@@ -797,7 +797,7 @@ end;
 function TMessyProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := MessyWireDataSubTypes[Index];
 end;
 
@@ -903,7 +903,7 @@ end;
 function TErrorStatusProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := ErrorStatusWireDataSubTypes[Index];
 end;
 
@@ -1026,7 +1026,7 @@ end;
 function TGoogleAnyProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
 begin
   Result := pbwstUnknown;
-  if Index <= FieldMaxID then
+  if Index <= LongWord(FieldMaxID) then
     Result := GoogleAnyWireDataSubTypes[Index];
 end;
 
