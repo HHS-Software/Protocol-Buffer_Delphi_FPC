@@ -34,6 +34,9 @@ This utility will take ProtocolBuffer message .proto formatted files as input, a
 ```
 
 ###  Notes:
+- The utility can process hundreds of input .proto files in the same run.  It searches directories for .proto files.  With default settings, it outputs one .pas file for every .proto file.
+- For better results, use the ```-m, -merge``` param, and its merges hundreds of single .pas files into one large .pas file.  All the required ```uses, forwards, etc``` statements are added automatically.
 - The default template file is attached to the binary, and no extra file is needed.  If you want to modify the template, then dump the original ```-prntmplt```, modify it and reload it with ```-tmplt=NAME```.
-- The utility can process hundreds of input .proto files in the same run.  It searches directories for .proto files.  In default settings, it outputs one .pas file for every .proto file.  For better results, use the ```-m, -merge``` param, and its merges hundreds of single .pas files into one large .pas file.  All the required ```uses, forwards, etc``` statements are added automatically.
+- The ```-pr, -prefix=ID``` adds a short name to the front of all proto classes. i.e. ```prefix=ABC``` gives ```TABC<protoname> = class```
+- Enum types:  Normally these are converted into pascal Enumeration type.  But if the option ```allow_alias``` is in the enum definition, indicating C style enum value integer re-use, then this utility will force all enum values to ```const``` values.
 
