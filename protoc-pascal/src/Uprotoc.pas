@@ -276,7 +276,15 @@ begin
     end;
 
   if (Length(TemplateFile) > 0) then
-    TemplateStrList.LoadFromFile(TemplateFile)
+    begin
+      TemplateStrList.LoadFromFile(TemplateFile);
+      i := TemplateStrList.IndexOf('{*UNITNAME*}unit;');
+      while i > 0 do
+        begin
+          TemplateStrList.Delete(0);
+          dec(i);
+        end;
+    end
   else
     if not GetTemplateFilefromBinary then
       begin

@@ -1,3 +1,12 @@
+
+
+//  This file is a template that is used in conjunction with protoc-pascal.exe,
+//  that generates the final T<someproto>.pas files.  This file CANNOT be compiled.
+//  You can make some limited edits or additions below.  i.e. to add a new property, or a
+//  new procedure.  Be sure to use the existing place holder tokens for PROTONAME, etc.
+//  For major changes, edits to the Generator code will be required as well.
+
+
 {*UNITNAME*}unit;
 
 interface
