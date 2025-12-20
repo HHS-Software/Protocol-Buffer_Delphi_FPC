@@ -1,7 +1,7 @@
 {
 Subject to the terms of the MIT license: Copyright (c) 2025 HHS Software Corp.
 
-Release date:  December 2025. release # 2.
+Release date:  December 2025. release # 3.
 
 ProtocolBuffer.pas - is an engine to send and recv data in Google's Protocol Buffer standard.
 
@@ -349,7 +349,6 @@ var BytesStart, Size: Integer;
     FieldIndexIDRepeat: LongWord;
     FieldIdx, FieldSubIdx, Repeated: Word;
     Value64: UInt64;
-    aByte: Byte;
     DataSubType: TProtoBufWireDataSubType;
     pValue: Pointer;
 
@@ -445,8 +444,8 @@ begin
               Value64 := ReadVarInt(Bytes, Stream);
               // Will occur when new fields exist but this proto def is old.
               //   dump it - and expect a loss of sync.
-              if Stream.Position + Value64 <= Stream.Size then
-                Stream.Position := Stream.Position + Value64
+              if Stream.Position + Int64(Value64) <= Stream.Size then
+                Stream.Position := Stream.Position + Int64(Value64)
               else
                 Stream.Seek(0, soEnd);
             end;
