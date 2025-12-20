@@ -2,8 +2,8 @@
 An Object-Pascal implementation for Google Protocol Buffer system.  For use in Delphi and FPC projects.  Includes a code generator (protoc-pascal) to parse .proto message files into .pas files.
 
 ## How to use?
-- Add the file [ProtocolBuffer.pas](https://github.com/HHS-Software/Protocol-Buffer_Delphi_FPC/blob/main/ProtocolBuffer.pas) to your project,
-- Use the [protoc-pascal.exe](https://github.com/HHS-Software/Protocol-Buffer_Delphi_FPC/tree/main/protoc-pascal/bin/) utility to convert your .proto message files into .pas object files.  Add these to your project.
+- Add the file [ProtocolBuffer.pas](ProtocolBuffer.pas) to your project,
+- Use the [protoc-pascal.exe](protoc-pascal/bin) utility to convert your .proto message files into .pas object files.  Add these to your project.
 - Add code to the project like so:
 ```
 procedure TForm1.Button1Click(Sender: TObject);
