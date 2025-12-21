@@ -771,8 +771,10 @@ begin
 
                   if Token.DefaultVal <> '' then
                     OnCreateDefaultList.Add('  ' + FFieldNameStr + ' := ' + Token.DefaultVal + ';');
-
                 end;
+
+              if Token.Cardinality = psRequired then
+                OnCreateDefaultList.Add('  FieldTouched[' + IntToStr(Token.FieldIndex) + '] := true;');
 
               FieldSubTypeArray[Token.FieldIndex] := Token.ProtoType;
             end;

@@ -28,7 +28,7 @@ type
     DefaultVal: string;
   end;
 
-const BuildVersionStr: string = 'v1.01';
+const BuildVersionStr: string = 'v1.02';
 
 const TEMPLATE_FILE_SIZE  = 10000; // MUST be equal or bigger that actual file size;
 
