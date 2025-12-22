@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message simple {
+    optional int32 reqId = 1;
+    optional double field2 = 2;
+    optional string someString = 3;
+    repeated int32 manyInts = 4;
+    map<string, string> mapStrStr = 5;
+}

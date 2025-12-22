@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+
+message nestedExample {
+    optional int32 order = 1;
+    optional nested nestedField = 2;
+    optional string item = 3;
+    repeated nested manyNestedField = 4;
+}
+
+message nested {
+    optional int32 age = 1;
+    optional string name = 2;
+    optional addressDetail address = 3;
+}
+
+message addressDetail {
+    optional int32 number = 1;
+    optional string street = 2;
+    optional string ville = 3;
+    optional string city = 4;
+}
+

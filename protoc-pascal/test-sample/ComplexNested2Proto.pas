@@ -1,11 +1,11 @@
 {
 Subject to the terms of the MIT license: Copyright (c) 2025 HHS Software Corp.
-  Created with protoc-pascal.exe   Version v1.01  (2025)
+  Created with protoc-pascal.exe   Version v1.02  (2025)
     https://github.com/HHS-Software/Protocol-Buffer_Delphi_FPC
     A utility to read and convert the Google Protocol Buffer v3 system into pascal code.
     The code is designed for the v3 proto.  Later proto versions possibly too.
 }
-unit SampleProto;
+unit ComplexNested2Proto;
 
 interface
 
@@ -19,84 +19,13 @@ uses System.Classes, System.SysUtils,
 
 type
   // forward declarations
+  TComplexNested2Proto = class;
   TGoogleAnyProto = class;
-  TTwoIntsProto = class;
 
   TPBComplexNested2Enums2 = (pbcoN0, pbcoN1, pbcoN2, pbcoScopeErr);
-  TPBMessyEnum = (pbmeE1, pbmeE2, pbmeScopeErr);
+  TPBMessyEnum = (pbmeE0, pbmeE1, pbmeE2, pbmeScopeErr);
   pTPBMessyEnum = ^TPBMessyEnum;
   pTPBComplexNested2Enums2 = ^TPBComplexNested2Enums2;
-
-  TSampleProto = class(TProtocolBuffer)
-  private
-    FReqId: Integer;  // 1 Opt
-    FField2: Double;  // 2 Req
-    FSomeString: string;  // 3 Opt
-    FSomeInts: TPBArrayOfInteger;  // 4 Rep
-    FMapStrStr: TProtoBufMapStringStringArray;  // 5 Map Rep
-    procedure SetReqId(const Value: Integer);
-    procedure SetField2(const Value: Double);
-    procedure SetSomeString(const Value: string);
-    function GetSomeInts(Index: Integer): Integer;
-    procedure SetSomeInts(Index: Integer; const Value: Integer);
-    function GetSomeIntsCount: Integer;
-    procedure SetSomeIntsCount(const Value: Integer);
-    function GetMapStrStr(Index: Integer): TProtoBufMapStringString;
-    procedure SetMapStrStr(Index: Integer; const Value: TProtoBufMapStringString);
-    function GetMapStrStrCount: Integer;
-    procedure SetMapStrStrCount(const Value: Integer);
-  public
-    constructor Create;
-    constructor CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-    destructor Destroy; override;
-    function WireDataSubType(Index: LongWord): TProtoBufWireDataSubType; override;
-    function ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer; override;
-    procedure WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer); override;
-    property ReqId: Integer read FReqId write SetReqId;  // 1
-    property Field2: Double read FField2 write SetField2;  // 2
-    property SomeString: string read FSomeString write SetSomeString;  // 3
-    property SomeInts[Index: Integer]: Integer read GetSomeInts write SetSomeInts;  // 4
-    property SomeIntsCount: Integer read GetSomeIntsCount write SetSomeIntsCount;  // 4
-    property MapStrStr[Index: Integer]: TProtoBufMapStringString read GetMapStrStr write SetMapStrStr;  // 5
-    property MapStrStrCount: Integer read GetMapStrStrCount write SetMapStrStrCount;  // 5
-  end;
-
-  TTwoIntsProto = class(TProtocolBuffer)
-  private
-    FAnIntOne: Integer;  // 1 Opt
-    FAnIntTwo: Integer;  // 2 Opt
-    procedure SetAnIntOne(const Value: Integer);
-    procedure SetAnIntTwo(const Value: Integer);
-  public
-    constructor Create;
-    constructor CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-    destructor Destroy; override;
-    function WireDataSubType(Index: LongWord): TProtoBufWireDataSubType; override;
-    function ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer; override;
-    procedure WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer); override;
-    property AnIntOne: Integer read FAnIntOne write SetAnIntOne;  // 1
-    property AnIntTwo: Integer read FAnIntTwo write SetAnIntTwo;  // 2
-  end;
-
-  TSimpleWithNestedProto = class(TProtocolBuffer)
-  private
-    FATwoInts: TTwoIntsProto;  // 1 Opt
-    FManyTwoIntsArray: array of TTwoIntsProto;  // 2 Rep
-    function GetManyTwoIntsArray(Index: Integer): TTwoIntsProto;
-    function GetManyTwoIntsArrayCount: Integer;
-    procedure SetManyTwoIntsArrayCount(const Value: Integer);
-  public
-    constructor Create;
-    constructor CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-    destructor Destroy; override;
-    function WireDataSubType(Index: LongWord): TProtoBufWireDataSubType; override;
-    function ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer; override;
-    procedure WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer); override;
-    function GetNestedArrayObjectByIndex(var FieldIndexIDRepeat: LongWord): Pointer; override;
-    property ATwoInts: TTwoIntsProto read FATwoInts;  // 1
-    property ManyTwoIntsArray[Index: Integer]: TTwoIntsProto read GetManyTwoIntsArray;  // 2
-    property ManyTwoIntsArrayCount: Integer read GetManyTwoIntsArrayCount write SetManyTwoIntsArrayCount;
-  end;
 
   TComplexNested2Proto = class(TProtocolBuffer)
   private
@@ -118,6 +47,7 @@ type
   TComplexProto = class(TProtocolBuffer)
   private
     FAstringInComplex: string;  // 1 Req
+    FANested2Msg: TComplexNested2Proto;  // 2 Opt
     procedure SetAstringInComplex(const Value: string);
   public
     constructor Create;
@@ -127,6 +57,7 @@ type
     function ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer; override;
     procedure WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer); override;
     property AstringInComplex: string read FAstringInComplex write SetAstringInComplex;  // 1
+    property ANested2Msg: TComplexNested2Proto read FANested2Msg;  // 2
   end;
 
   TEmptyMessageProto = class(TProtocolBuffer)
@@ -147,13 +78,17 @@ type
     FEnumfield: TPBMessyEnum;  // 4 Opt
     FIntfield: Int64;  // 3 Opt
     FEmptyfield: string;  // 6 Opt
-    FBytesfield: Pointer;  // 8 Opt
+    FBytesfield: Pointer;  // 12 Opt
     FBytesfieldSize: Integer;
+    FAstring: string;  // 9 Opt
+    FInteger: Integer;  // 8 Opt
     procedure SetStringfield(const Value: string);
     procedure SetBoolfield(const Value: Boolean);
     procedure SetEnumfield(const Value: TPBMessyEnum);
     procedure SetIntfield(const Value: Int64);
     procedure SetEmptyfield(const Value: string);
+    procedure SetAstring(const Value: string);
+    procedure SetInteger(const Value: Integer);
   public
     constructor Create;
     constructor CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
@@ -167,8 +102,10 @@ type
     property Enumfield: TPBMessyEnum read FEnumfield write SetEnumfield;  // 4
     property Intfield: Int64 read FIntfield write SetIntfield;  // 3
     property Emptyfield: string read FEmptyfield write SetEmptyfield;  // 6
-    property Bytesfield: Pointer read FBytesfield;  // 8
+    property Bytesfield: Pointer read FBytesfield;  // 12
     property BytesfieldSize: Integer read FBytesfieldSize;
+    property Astring: string read FAstring write SetAstring;  // 9
+    property Integer: Integer read FInteger write SetInteger;  // 8
   end;
 
   TErrorStatusProto = class(TProtocolBuffer)
@@ -213,391 +150,6 @@ type
 
 implementation
 
-{ TSampleProto }
-
-const
-  SampleFieldMaxID = 5;
-  SampleWireDataSubTypes: array [0..SampleFieldMaxID] of TProtoBufWireDataSubType = (
-    pbwstUnused, pbwstVarIntInt32, pbwstI64Double, pbwstLenString, pbwstVarIntInt32, pbwstMapMessage);
-  SampleMapStrStrWireDataSubTypes: array [0..2] of TProtoBufWireDataSubType =
-    (pbwstUnknown, pbwstLenString, pbwstLenString);
-
-constructor TSampleProto.Create;
-begin
-  inherited Create(SampleFieldMaxID);
-end;
-
-constructor TSampleProto.CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-begin
-  Create;
-  SetParentDetails(ParentIndex, Parent);
-end;
-
-destructor TSampleProto.Destroy;
-begin
-  inherited;
-end;
-
-function TSampleProto.WireDataSubType(Index: LongWord): TProtoBufWireDataSubType;
-var FieldIdx, FieldSubIdx: Word;
-begin
-  FieldIdx := Index and PB_FIELD_IDX_MASK;
-  FieldSubIdx := Index and PB_FIELD_SUB_IDX_MASK shr PB_FIELD_SUB_IDX_OFFSET;
-  Result := pbwstUnknown;
-  if FieldIdx <= FieldMaxID then
-    Result := SampleWireDataSubTypes[FieldIdx];
-  if FieldSubIdx > 0 then
-    case FieldIdx of
-      5: Result := SampleMapStrStrWireDataSubTypes[FieldSubIdx];
-    end;
-end;
-
-function TSampleProto.ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer;
-var FieldIdx, FieldSubIdx, Repeated: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  FieldSubIdx := FieldIndexIDRepeat and PB_FIELD_SUB_IDX_MASK shr PB_FIELD_SUB_IDX_OFFSET;  // 1 based
-  Repeated := FieldIndexIDRepeat shr PB_FIELD_REPEAT_IDX_OFFSET;  // 1 based
-  Result := nil;
-
-  case FieldIdx of
-    1: Result := @FReqId;
-    2: Result := @FField2;
-    3: Result := @FSomeString;
-    4: begin
-          if Repeated < Length(FSomeInts) then
-            begin
-              Result := @FSomeInts[Repeated];
-              inc(Repeated);
-            end;
-          if Repeated >= Length(FSomeInts) then
-            Repeated := 0;
-        end;
-    5: begin
-          if Repeated <= Length(FMapStrStr) then
-             case FieldSubIdx of
-               1:begin
-                   Result := @FMapStrStr[Repeated-1].Key;
-                   inc(FieldSubIdx);
-                 end;
-               2:begin
-                   Result := @FMapStrStr[Repeated-1].Value;
-                   inc(Repeated);
-                   dec(FieldSubIdx);
-                 end;
-             end;
-          if Repeated > Length(FMapStrStr) then
-            Repeated := 0;
-        end;
-  end;
-  FieldIndexIDRepeat := FieldIdx or (FieldSubIdx shl PB_FIELD_SUB_IDX_OFFSET) or
-                                    (Repeated shl PB_FIELD_REPEAT_IDX_OFFSET);
-end;
-
-procedure TSampleProto.WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer);
-var FieldIdx, FieldSubIdx, Repeated: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  FieldSubIdx := FieldIndexIDRepeat and PB_FIELD_SUB_IDX_MASK shr PB_FIELD_SUB_IDX_OFFSET;  // 1 based
-  Repeated := FieldIndexIDRepeat shr PB_FIELD_REPEAT_IDX_OFFSET;  // 1 based
-  if FieldIdx <= FieldMaxID then
-    FieldTouched[FieldIdx] := true;
-
-  case FieldIdx of
-    1: FReqId := pInteger(Value)^;
-    2: FField2 := pDouble(Value)^;
-    3: FSomeString := pstring(Value)^;
-    4: begin
-          if Repeated = $FFFF then //  -1 clears the array
-            FSomeInts := nil
-          else
-            begin
-              if Repeated >= Length(FSomeInts) then
-                SetLength(FSomeInts, Repeated + 1);
-              FSomeInts[Repeated] := pInteger(Value)^;
-            end;
-        end;
-    5: begin
-          if Repeated = $FFFF then //  -1 clears the array
-            FMapStrStr := nil
-          else if Repeated > 0 then
-            begin
-              if Repeated > Length(FMapStrStr) then
-                SetLength(FMapStrStr, Repeated);
-              case FieldSubIdx of
-                1: FMapStrStr[Repeated -1].Key := pString(Value)^;
-                2: FMapStrStr[Repeated -1].Value := pString(Value)^;
-              end;
-            end;
-        end;
-  end;
-end;
-
-procedure TSampleProto.SetReqId(const Value: Integer);
-begin
-  FReqId := Value;
-  FieldTouched[1] := true;
-end;
-
-procedure TSampleProto.SetField2(const Value: Double);
-begin
-  FField2 := Value;
-  FieldTouched[2] := true;
-end;
-
-procedure TSampleProto.SetSomeString(const Value: string);
-begin
-  FSomeString := Value;
-  FieldTouched[3] := true;
-end;
-
-function TSampleProto.GetSomeInts(Index: Integer): Integer;
-begin
-  if Index <= Length(FSomeInts) then
-    Result := FSomeInts[Index]
-  else
-    Result := FSomeInts[0];
-end;
-
-procedure TSampleProto.SetSomeInts(Index: Integer; const Value: Integer);
-var i: Integer;
-begin
-  i := Length(FSomeInts);
-  if Index >= i then
-    SetLength(FSomeInts, Index + 1);
-  FSomeInts[Index] := Value;
-  FieldTouched[4] := true;
-end;
-
-function TSampleProto.GetSomeIntsCount: Integer;
-begin
-  Result := Length(FSomeInts);
-end;
-
-procedure TSampleProto.SetSomeIntsCount(const Value: Integer);
-begin
-  SetLength(FSomeInts, Value);
-end;
-
-function TSampleProto.GetMapStrStr(Index: Integer): TProtoBufMapStringString;
-begin
-  if Index <= Length(FMapStrStr) then
-    Result := FMapStrStr[Index]
-  else
-    Result := FMapStrStr[0];
-end;
-
-procedure TSampleProto.SetMapStrStr(Index: Integer; const Value: TProtoBufMapStringString);
-var i: Integer;
-begin
-  i := Length(FMapStrStr);
-  if Index >= i then
-    SetLength(FMapStrStr, Index + 1);
-  FMapStrStr[Index] := Value;
-  FieldTouched[5] := true;
-end;
-
-function TSampleProto.GetMapStrStrCount: Integer;
-begin
-  Result := Length(FMapStrStr);
-end;
-
-procedure TSampleProto.SetMapStrStrCount(const Value: Integer);
-begin
-  SetLength(FMapStrStr, Value);
-end;
-
-{ TTwoIntsProto }
-
-const
-  TwoIntsFieldMaxID = 2;
-  TwoIntsWireDataSubTypes: array [0..TwoIntsFieldMaxID] of TProtoBufWireDataSubType = (
-    pbwstUnused, pbwstVarIntInt32, pbwstVarIntInt32);
-
-constructor TTwoIntsProto.Create;
-begin
-  inherited Create(TwoIntsFieldMaxID);
-end;
-
-constructor TTwoIntsProto.CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-begin
-  Create;
-  SetParentDetails(ParentIndex, Parent);
-end;
-
-destructor TTwoIntsProto.Destroy;
-begin
-  inherited;
-end;
-
-function TTwoIntsProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
-begin
-  Result := pbwstUnknown;
-  if Index <= LongWord(FieldMaxID) then
-    Result := TwoIntsWireDataSubTypes[Index];
-end;
-
-function TTwoIntsProto.ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer;
-var FieldIdx: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  Result := nil;
-
-  case FieldIdx of
-    1: Result := @FAnIntOne;
-    2: Result := @FAnIntTwo;
-  end;
-end;
-
-procedure TTwoIntsProto.WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer);
-var FieldIdx: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  if FieldIdx <= FieldMaxID then
-    FieldTouched[FieldIdx] := true;
-
-  case FieldIdx of
-    1: FAnIntOne := pInteger(Value)^;
-    2: FAnIntTwo := pInteger(Value)^;
-  end;
-end;
-
-procedure TTwoIntsProto.SetAnIntOne(const Value: Integer);
-begin
-  FAnIntOne := Value;
-  FieldTouched[1] := true;
-end;
-
-procedure TTwoIntsProto.SetAnIntTwo(const Value: Integer);
-begin
-  FAnIntTwo := Value;
-  FieldTouched[2] := true;
-end;
-
-{ TSimpleWithNestedProto }
-
-const
-  SimpleWithNestedFieldMaxID = 2;
-  SimpleWithNestedWireDataSubTypes: array [0..SimpleWithNestedFieldMaxID] of TProtoBufWireDataSubType = (
-    pbwstUnused, pbwstNestedMessage, pbwstRepteadNestedMessage);
-
-constructor TSimpleWithNestedProto.Create;
-begin
-  inherited Create(SimpleWithNestedFieldMaxID);
-  FATwoInts := TTwoIntsProto.CreateAsNested(1, Self);
-
-end;
-
-constructor TSimpleWithNestedProto.CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
-begin
-  Create;
-  SetParentDetails(ParentIndex, Parent);
-end;
-
-destructor TSimpleWithNestedProto.Destroy;
-var i: Integer;
-begin
-  FATwoInts.Free;
-
-  for i := 0 to High(FManyTwoIntsArray) do
-    FManyTwoIntsArray[i].Free;
-
-  inherited;
-end;
-
-function TSimpleWithNestedProto.WireDataSubType(Index: Longword): TProtoBufWireDataSubType;
-begin
-  Result := pbwstUnknown;
-  if Index <= LongWord(FieldMaxID) then
-    Result := SimpleWithNestedWireDataSubTypes[Index];
-end;
-
-function TSimpleWithNestedProto.ReadFieldByIndex(var FieldIndexIDRepeat: LongWord; var Size: Integer): Pointer;
-var FieldIdx, FieldSubIdx, Repeated: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  FieldSubIdx := FieldIndexIDRepeat and PB_FIELD_SUB_IDX_MASK shr PB_FIELD_SUB_IDX_OFFSET;  // 1 based
-  Repeated := FieldIndexIDRepeat shr PB_FIELD_REPEAT_IDX_OFFSET;  // 1 based
-  Result := nil;
-
-  case FieldIdx of
-    1: Result := FATwoInts;
-    2:begin  // nested - repeated
-          if Repeated < Length(FManyTwoIntsArray) then
-            begin
-              Result := FManyTwoIntsArray[Repeated];
-              inc(Repeated);
-            end;
-          if Repeated >= Length(FManyTwoIntsArray) then
-            Repeated := 0;
-      end;
-  end;
-  FieldIndexIDRepeat := FieldIdx or (FieldSubIdx shl PB_FIELD_SUB_IDX_OFFSET) or
-                                    (Repeated shl PB_FIELD_REPEAT_IDX_OFFSET);
-end;
-
-procedure TSimpleWithNestedProto.WriteFieldByIndex(FieldIndexIDRepeat: LongWord; Value: Pointer; Size: Integer);
-var FieldIdx: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  if FieldIdx <= FieldMaxID then
-    FieldTouched[FieldIdx] := true;
-
-//  case FieldIdx of
-    //1: FATwoInts; // nested
-    //2: FManyTwoIntsArray; // nested - repeated
-//  end;
-end;
-
-function TSimpleWithNestedProto.GetManyTwoIntsArray(Index: Integer): TTwoIntsProto;
-begin
-  if Index >= Length(FManyTwoIntsArray) then
-    SetManyTwoIntsArrayCount(Index + 1);
-  Result := FManyTwoIntsArray[Index];
-end;
-
-function TSimpleWithNestedProto.GetManyTwoIntsArrayCount: Integer;
-begin
-  Result := Length(FManyTwoIntsArray);
-end;
-
-procedure TSimpleWithNestedProto.SetManyTwoIntsArrayCount(const Value: Integer);
-var i, l: Integer;
-begin
-  l := Length(FManyTwoIntsArray);
-  if Value > l then
-    begin
-      SetLength(FManyTwoIntsArray, Value);
-      for i := l to Value - 1 do
-        FManyTwoIntsArray[i] := TTwoIntsProto.CreateAsNested(2, Self);
-    end
-  else if Value < l then
-    begin
-      for i := l -1 downto Value do
-        FManyTwoIntsArray[i].Free;
-      SetLength(FManyTwoIntsArray, Value);
-    end;
-end;
-
-function TSimpleWithNestedProto.GetNestedArrayObjectByIndex(var FieldIndexIDRepeat: LongWord): Pointer;
-var FieldIdx, Repeated: Word;
-begin
-  FieldIdx := FieldIndexIDRepeat and PB_FIELD_IDX_MASK;
-  Repeated := FieldIndexIDRepeat shr PB_FIELD_REPEAT_IDX_OFFSET;  // 1 based
-  Result := nil;
-
-  case FieldIdx of
-    2:begin
-      if Repeated >= GetManyTwoIntsArrayCount then
-        SetManyTwoIntsArrayCount(Repeated + 1);
-      Result := GetManyTwoIntsArray(Repeated);
-      inc(Repeated);
-    end;
-
-  end;
-  FieldIndexIDRepeat := FieldIdx or (Repeated shl PB_FIELD_REPEAT_IDX_OFFSET);
-end;
-
 { TComplexNested2Proto }
 
 const
@@ -608,6 +160,7 @@ const
 constructor TComplexNested2Proto.Create;
 begin
   inherited Create(ComplexNested2FieldMaxID);
+  FieldTouched[1] := true;
 end;
 
 constructor TComplexNested2Proto.CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
@@ -668,13 +221,15 @@ end;
 { TComplexProto }
 
 const
-  ComplexFieldMaxID = 1;
+  ComplexFieldMaxID = 2;
   ComplexWireDataSubTypes: array [0..ComplexFieldMaxID] of TProtoBufWireDataSubType = (
-    pbwstUnused, pbwstLenString);
+    pbwstUnused, pbwstLenString, pbwstNestedMessage);
 
 constructor TComplexProto.Create;
 begin
   inherited Create(ComplexFieldMaxID);
+  FANested2Msg := TComplexNested2Proto.CreateAsNested(2, Self);
+  FieldTouched[1] := true;
 end;
 
 constructor TComplexProto.CreateAsNested(ParentIndex: Integer; Parent: TProtocolBuffer);
@@ -685,6 +240,7 @@ end;
 
 destructor TComplexProto.Destroy;
 begin
+  FANested2Msg.Free;
   inherited;
 end;
 
@@ -703,6 +259,7 @@ begin
 
   case FieldIdx of
     1: Result := @FAstringInComplex;
+    2: Result := FANested2Msg;
   end;
 end;
 
@@ -715,6 +272,7 @@ begin
 
   case FieldIdx of
     1: FAstringInComplex := pstring(Value)^;
+    //2: FANested2Msg; // nested
   end;
 end;
 
@@ -768,10 +326,10 @@ end;
 { TMessyProto }
 
 const
-  MessyFieldMaxID = 8;
+  MessyFieldMaxID = 12;
   MessyWireDataSubTypes: array [0..MessyFieldMaxID] of TProtoBufWireDataSubType = (
     pbwstUnused, pbwstLenString, pbwstVarIntBool, pbwstVarIntInt64, pbwstVarIntEnum, pbwstUnused, pbwstLenString, 
-    pbwstUnused, pbwstLenBytes);
+    pbwstUnused, pbwstVarIntInt32, pbwstLenString, pbwstUnused, pbwstUnused, pbwstLenBytes);
 
 constructor TMessyProto.Create;
 begin
@@ -813,7 +371,9 @@ begin
     4: Result := @FEnumfield;
     3: Result := @FIntfield;
     6: Result := @FEmptyfield;
-    8: begin Result := FBytesfield; Size := FBytesfieldSize; end;
+    12: begin Result := FBytesfield; Size := FBytesfieldSize; end;
+    9: Result := @FAstring;
+    8: Result := @FInteger;
   end;
 end;
 
@@ -830,7 +390,9 @@ begin
     4: if pInteger(Value)^ > Ord(High(TPBMessyEnum)) then FEnumfield := High(TPBMessyEnum) else FEnumfield := pTPBMessyEnum(Value)^;
     3: FIntfield := pInt64(Value)^;
     6: FEmptyfield := pstring(Value)^;
-    8: SetBytesfield(Value, Size);
+    12: SetBytesfield(Value, Size);
+    9: FAstring := pstring(Value)^;
+    8: FInteger := pInteger(Value)^;
   end;
 end;
 
@@ -870,6 +432,18 @@ begin;
   GetMem(FBytesfield, Size);
   FBytesfieldSize := Size;
   Move(Value^, FBytesfield^, Size);
+  FieldTouched[12] := true;
+end;
+
+procedure TMessyProto.SetAstring(const Value: string);
+begin
+  FAstring := Value;
+  FieldTouched[9] := true;
+end;
+
+procedure TMessyProto.SetInteger(const Value: Integer);
+begin
+  FInteger := Value;
   FieldTouched[8] := true;
 end;
 
