@@ -21,6 +21,8 @@ To decode incoming data:
 ```
   SampleProto := TSampleProto.Create;
   Size := SampleProto.DecodeToProto(InboundStream, ByteSizeOfData);
+  x := SampleProto.SomeField;
+    // read other properties...
 ```
 The `DecodeToProto` function takes the encoded stream data and de-serializes it to the propeties of SampleProto.
 
