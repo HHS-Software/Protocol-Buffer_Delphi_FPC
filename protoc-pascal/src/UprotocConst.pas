@@ -28,7 +28,7 @@ type
     DefaultVal: string;
   end;
 
-const BuildVersionStr: string = 'v1.02';
+const BuildVersionStr: string = 'v1.03';
 
 const TEMPLATE_FILE_SIZE  = 10000; // MUST be equal or bigger that actual file size;
 
@@ -117,14 +117,14 @@ const BlurbStr: array [0..27] of string = (
 );
 
 
-const ReservedWords: array [0..81] of string = (
+const ReservedWords: array [0..82] of string = (
   'absolute', 'and', 'array', 'asm', 'begin', 'case', 'const', 'constructor', 'destructor', 'div', 'do', 'downto', 'else',
   'end', 'file', 'for', 'function', 'goto', 'if', 'implementation', 'in', 'inherited', 'inline', 'interface', 'label', 'mod',
   'nil', 'not', 'object', 'of', 'operator', 'or', 'packed', 'procedure', 'program', 'record', 'reintroduce', 'repeat', 'self',
   'set', 'shl', 'shr', 'string', 'then', 'to', 'type', 'unit', 'until', 'uses', 'var', 'while', 'with', 'xor', 'as', 'class',
   'dispinterface', 'except', 'exports', 'finalization', 'finally', 'initialization', 'inline', 'is', 'library', 'on', 'out',
   'packed', 'property', 'raise', 'resourcestring', 'threadvar', 'try', 'default',
-  'override', 'virtual', 'dynamic', 'overload', 'forward', 'uses', 'abstract', 'initialization', 'finalization'
+  'override', 'virtual', 'dynamic', 'overload', 'forward', 'uses', 'abstract', 'initialization', 'finalization', 'message'
   );
 
 const ProhibitedNameCharsSet: TSysCharSet = [#0..#21, #58..#64, #91..#96, #123..#255];
