@@ -2,7 +2,12 @@ unit UprotocConst;
 
 interface
 
-uses System.SysUtils;
+{$IFDEF FPC}
+{$mode delphi}{$H+}
+uses SysUtils, Classes;
+{$ELSE}
+uses System.Classes, System.SysUtils;
+{$ENDIF}
 
 type
   TCardinalityParam = (psNone, psRequired, psOptional, psOneOf, psReserved, psRepeated, psMap);

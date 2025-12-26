@@ -54,8 +54,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
-        <PostBuildEvent><![CDATA[pause
-copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both
+        <PostBuildEvent><![CDATA[copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both
 move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe
 $(PostBuildEvent)]]></PostBuildEvent>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
@@ -87,6 +86,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Debugger_RunParams>C:\Files\IABrokers\install\source\proto\ -m -mn IABProtoBufTypes.pas -op C:\Files\Borland\Delphi12.1\Projects\Codeadd\ -pr IAB -sv C:\Files\IABrokers\install\API_VersionNum.txt</Debugger_RunParams>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -181,7 +184,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
@@ -189,7 +192,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
@@ -197,7 +200,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='OSX32'">
@@ -205,7 +208,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -213,7 +216,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
@@ -221,7 +224,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>pause&amp;&amp;copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
+        <PostBuildEvent>copy /b .\$(Platform)\$(Config)\$(OUTPUTNAME).exe + .\TemplateProtoBuffer.pas  .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both&amp;&amp;move /y .\$(Platform)\$(Config)\$(OUTPUTNAME).exe.both .\$(Platform)\$(Config)\$(OUTPUTNAME).exe</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

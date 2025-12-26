@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="protoc_pascal.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="2"/>
+        <CursorPos Y="48"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Uprotoc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="349"/>
+        <CursorPos Y="366"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="UprotocParser.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="521"/>
+        <CursorPos X="78" Y="549"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="UprotocGenerator.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="13"/>
+        <CursorPos X="78" Y="28"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="UprotocConst.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="4"/>
+        <CursorPos Y="3"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="116" TopLine="88"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="117" TopLine="99"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="121" TopLine="99"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="127" TopLine="99"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="128" TopLine="100"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="131" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="137" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="138" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="142" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="148" TopLine="120"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="149" TopLine="121"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="154" TopLine="126"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="158" TopLine="130"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="159" TopLine="131"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="160" TopLine="132"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="162" TopLine="134"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="163" TopLine="135"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="165" TopLine="137"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="168" TopLine="140"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="83" TopLine="66"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="172" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="173" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="176" TopLine="155"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="179" TopLine="166"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="194" TopLine="174"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="197" TopLine="174"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="198" TopLine="174"/>
+      </Position>
+      <Position>
+        <Filename Value="protoc_pascal.lpr"/>
+        <Caret Line="27" TopLine="14"/>
+      </Position>
+      <Position>
+        <Filename Value="protoc_pascal.lpr"/>
+        <Caret Line="34" TopLine="14"/>
+      </Position>
+      <Position>
+        <Filename Value="Uprotoc.pas"/>
+        <Caret Line="366" TopLine="349"/>
+      </Position>
+    </JumpHistory>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="protoc_pascal.lpr"/>
+        <Line Value="25"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="protoc_pascal.lpr"/>
+        <Line Value="48"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="Uprotoc.pas"/>
+        <Line Value="179"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

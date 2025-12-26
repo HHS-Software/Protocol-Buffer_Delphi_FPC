@@ -2,9 +2,15 @@ unit UprotocGenerator;
 
 interface
 
-uses System.Classes, System.SysUtils, System.Math, UprotocConst;
+{$IFDEF FPC}
+{$mode delphi}{$H+}
+uses SysUtils, Classes, Math,
+{$ELSE}
+uses System.Classes, System.SysUtils, System.Math, Winapi.Windows,
+{$ENDIF}
+  UprotocConst;
 
- function TokenToPascal(ProtoTokenList: TList; DelphiFileStrList: TStringList; Merged: Boolean;
+ function TokenToPascal(ProtoTokenList: TList; DelphiFileStrList: TStringList;
                     ClassPrefix, ClassName: string; var UnitNameStr: string): Boolean;
 
  var
@@ -19,7 +25,7 @@ implementation
 
 uses Uprotoc;
 
-function TokenToPascal(ProtoTokenList: TList; DelphiFileStrList: TStringList; Merged: Boolean;
+function TokenToPascal(ProtoTokenList: TList; DelphiFileStrList: TStringList;
                     ClassPrefix, ClassName: string; var UnitNameStr: string): Boolean;
 
 var i, j, f, t, ln, ln2,
@@ -29,9 +35,6 @@ var i, j, f, t, ln, ln2,
   ProtoNameStr,
   EnumNameStr,
   EnumNameStrRaw,
-  PrivateFieldStr,
-  PrivateSetGetStr,
-  ProtertiesStr,
   UsesStr,
   ParentIndexStr,
   WireSubTypesStr,
@@ -43,7 +46,6 @@ var i, j, f, t, ln, ln2,
   TNestProtoNameStr,
   FNestProtoNameStr,
   NestProtoNameStr,
-  NestProtoFileNameStr,
   NestedCreateStr,
   NestedFreeStr,
   FFieldNameStr,
@@ -93,6 +95,7 @@ begin
   ParseError := '';
   ErrorLine := '';
   PrefixStr := ClassPrefix;
+  EnumArray := nil;
 
   DefaultsStrList := TStringList.Create;
   OnCreateDefaultList := TStringList.Create;
@@ -132,9 +135,6 @@ begin
 
       ProtoNameStr := '';
       EnumNameStr := '';
-      PrivateFieldStr := '';
-      PrivateSetGetStr := '';
-      ProtertiesStr := '';
       WireSubTypesStr := '';
       WireSubTypesMapsStr := '';
       TProtoNameStr := '';
@@ -149,6 +149,7 @@ begin
       WireDataSubMapTypeFuncCaseStr := '';
       GetNestedArrayObjectByIndexCaseInsertStr := '';
       ParentIndexStr := '';
+      FieldTypeStr := '';
 
       OnCreateDefaultList.Clear;
       PrivateFieldStrList.Clear;
@@ -285,7 +286,7 @@ begin
           for i := t downto f do   // delete tokens for this enum
             begin
               Finalize(PTProtoFieldToken(ProtoTokenList[i])^);
-              Dispose(ProtoTokenList[i]);
+              Dispose(PTProtoFieldToken(ProtoTokenList[i]));
               ProtoTokenList.Delete(i);
             end;
 
@@ -378,7 +379,6 @@ begin
             begin
               s := Token.ProtoName;
               s[1] := Char(Ord(s[1]) and (not $20));
-              NestProtoFileNameStr := PrefixStr + s + 'Proto';
               TNestProtoNameStr := 'T' + PrefixStr + s + 'Proto';
               s := Token.FieldName;
               s[1] := Char(Ord(s[1]) and (not $20));
@@ -787,7 +787,7 @@ begin
       for i := t downto f do   // delete used tokens for one message
         begin
           Finalize(PTProtoFieldToken(ProtoTokenList[i])^);
-          Dispose(ProtoTokenList[i]);
+          Dispose(PTProtoFieldToken(ProtoTokenList[i]));
           ProtoTokenList.Delete(i);
         end;
 

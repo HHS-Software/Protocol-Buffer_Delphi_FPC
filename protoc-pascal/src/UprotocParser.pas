@@ -2,7 +2,13 @@ unit UprotocParser;
 
 interface
 
-uses System.Classes, System.SysUtils, UprotocConst;
+{$IFDEF FPC}
+{$mode delphi}{$H+}
+uses SysUtils, Classes,
+{$ELSE}
+uses System.Classes, System.SysUtils,
+{$ENDIF}
+  UprotocConst;
 
   function ParseProtoFile(ProtoFile: string;  ProtoFileTokenList: TList): Boolean;
   function ReservedWordCheck(s: string): string;
@@ -183,6 +189,7 @@ begin
   ParseError := '';
   ErrorLine := '';
   MsgFound := false;
+  MsgHeaderLine := nil;
 
   if not FileExists(ProtoFile) then
     begin
@@ -539,7 +546,7 @@ begin
             if p > 0 then
               begin
                 Token.DefaultVal := ParseLine(ProtoStrList[ln], decDefValue, Token.Cardinality);
-                Token.DefaultVal := StringReplace(Token.DefaultVal, '\', '', [rfReplaceAll]);
+                Token.DefaultVal := StringReplace(Token.DefaultVal, PathDelim, '', [rfReplaceAll]);
                 Token.DefaultVal := StringReplace(Token.DefaultVal, '''', '''', [rfReplaceAll]);
                 Token.DefaultVal := StringReplace(Token.DefaultVal, '"', '''', [rfReplaceAll]);
               end;

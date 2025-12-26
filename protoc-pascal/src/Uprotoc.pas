@@ -2,8 +2,13 @@ unit Uprotoc;
 
 interface
 
-uses System.Classes, System.SysUtils, UprotocConst, UprotocParser, UprotocGenerator, Winapi.Windows;
-
+{$IFDEF FPC}
+{$mode delphi}{$H+}
+uses SysUtils, Classes,
+{$ELSE}
+uses System.Classes, System.SysUtils, Winapi.Windows,
+{$ENDIF}
+  UprotocConst, UprotocParser, UprotocGenerator;
 
   function ParseCommandLine: Boolean;
   procedure WriteHeader;
@@ -66,7 +71,7 @@ begin
           WriteLn('    ********************************');
           WriteLn('');
           WriteLn(TemplateStrList.Text);
-          System.SysUtils.DeleteFile('TemplateProtoBuffer.pas');;
+          {$IFNDEF FPC}System.SysUtils.{$ENDIF}DeleteFile('TemplateProtoBuffer.pas');;
           TemplateStrList.SaveToFile('TemplateProtoBuffer.pas');
           WriteBlurbOut := false;
         end;
@@ -168,21 +173,21 @@ begin
   if (p > 0) and (p = Length(MergeFileName) - 3) then
     Delete(MergeFileName, p, 100);
 
-  if (OutPath <> '') and (OutPath[Length(OutPath)] <> '\') then
-    OutPath := OutPath + '\';
+  if (OutPath <> '') and (OutPath[Length(OutPath)] <> PathDelim) then
+    OutPath := OutPath + PathDelim;
 
   for i := 0 to InPathList.Count -1 do
     begin
       s := InPathList[i];
-      if s[Length(s)] <> '\' then
-        s := s + '\';
+      if s[Length(s)] <> PathDelim then
+        s := s + PathDelim;
       InPathList[i] := s;
       if FindFirst(s + '*.proto', faNormal, SR) = 0 then
         begin
           repeat
             ProtoFiles.Add(s + SR.Name); //Fill the list
           until FindNext(SR) <> 0;
-          System.SysUtils.FindClose(SR);
+          {$IFNDEF FPC}System.SysUtils.{$ENDIF}FindClose(SR);
         end;
     end;
 
@@ -244,7 +249,11 @@ begin
   repeat
     while (NativeUInt(pb) < NativeUInt(pend)) and (pb^ <> '{') do
       inc(pb);
+    {$IFDEF FPC}
+    c := strlcomp(pb, @UnitStr[1], i);
+    {$ELSE}
     c := CompareStringA(LOCALE_USER_DEFAULT, 0, pb, i, @UnitStr[1], i) - CSTR_EQUAL;
+    {$ENDIF}
     if c = 0 then
       begin
         MemStream.Position := Int64(NativeUInt(pb) - NativeUInt(MemStream.Memory));
@@ -337,7 +346,7 @@ begin
                 end;
             end;
           UnitNameStr := '';
-          Status := TokenToPascal(ProtoTokenList, DelphiFile, Merge, Prefix, ClassName, UnitNameStr);
+          Status := TokenToPascal(ProtoTokenList, DelphiFile, Prefix, ClassName, UnitNameStr);
           if not Status then
             begin
               WriteError(ParseError);
@@ -351,7 +360,7 @@ begin
               FileName := OutPath + UnitNameStr + '.pas';
             end;
 
-          System.SysUtils.DeleteFile(FileName);
+          {$IFNDEF FPC}System.SysUtils.{$ENDIF}DeleteFile(FileName);
           FileNameSucess := FileName;
           if DelphiFile.Count > 0 then
             DelphiFile.SaveToFile(FileName)
@@ -364,7 +373,7 @@ begin
   for i := 0 to ProtoTokenList.Count - 1 do
     begin
       Finalize(PTProtoFieldToken(ProtoTokenList[i])^);
-      Dispose(ProtoTokenList[i]);
+      Dispose(PTProtoFieldToken(ProtoTokenList[i]));
     end;
   ProtoTokenList.Free;
   DelphiFile.Free;
